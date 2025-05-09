@@ -56,5 +56,67 @@
       Falls nicht, <a href="https://sapered.com">klicke hier</a>.
     </div>
   </div>
+ 
+  <script>
+  const canvas = document.getElementById('trail');
+  const ctx = canvas.getContext('2d');
+  let width, height;
+  let bubbles = [];
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  document.addEventListener('mousemove', (e) => {
+    for (let i = 0; i < 2; i++) {
+      bubbles.push({
+        x: e.clientX,
+        y: e.clientY,
+        radiusX: Math.random() * 12 + 4,
+        radiusY: Math.random() * 10 + 4,
+        rotation: Math.random() * Math.PI,
+        alpha: 0.1 + Math.random() * 0.25,
+        dx: (Math.random() - 0.5) * 1.2,
+        dy: (Math.random() - 0.5) * 1.2,
+        dr: (Math.random() - 0.5) * 0.02
+      });
+    }
+  });
+
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < bubbles.length; i++) {
+      let b = bubbles[i];
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.rotate(b.rotation);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, b.radiusX, b.radiusY, 0, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255, 255, 255, ${b.alpha})`;
+      ctx.fill();
+      ctx.restore();
+
+      b.x += b.dx;
+      b.y += b.dy;
+      b.rotation += b.dr;
+      b.alpha -= 0.004;
+
+      if (b.alpha <= 0) {
+        bubbles.splice(i, 1);
+        i--;
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+</script>
+
 </body>
 </html>
