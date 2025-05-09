@@ -15,20 +15,25 @@
       width: 100%;
       font-family: 'Archivo Black', sans-serif;
       color: #FF6F6F;
-      background-color: #201E50; /* Neue Hintergrundfarbe */
+      background-color: #201E50;
     }
 
     body {
       background: url('JK.jpg') no-repeat top center;
       background-size: cover;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: center;
       flex-direction: column;
     }
 
+    .content {
+      padding-left: 60px; /* Nur hier Padding! */
+    }
+
     h1 {
       font-size: 3rem;
+      margin: 0;
     }
 
     .hint {
@@ -44,10 +49,12 @@
   </style>
 </head>
 <body>
-  <h1>Janine Kappenberg</h1>
-  <div class="hint">
-    Du wirst in wenigen Sekunden weitergeleitet…<br />
-    Falls nicht, <a href="https://sapered.com">klicke hier</a>.
+  <div class="content">
+    <h1>Janine Kappenberg</h1>
+    <div class="hint">
+      Du wirst in wenigen Sekunden weitergeleitet…<br />
+      Falls nicht, <a href="https://sapered.com">klicke hier</a>.
+    </div>
   </div>
 </body>
 </html>
